@@ -1,0 +1,8 @@
+<h1>Welcome! Here are necessery data to finalize your order:</h1>
+{% if accountNumber is defined and accountNumber is not null %}
+    Account number: {{ accountNumber }}
+{% endif %}
+<p>Click the following link, to pay for your shopping: <br><br>
+    <a href="{{ signedUrl }}">Pay now</a>
+    . The link will expire in {{ expiresAtMessageKey|trans(expiresAtMessageData, "VerifyEmailBundle") }}.</p>
+<p>Best Regards!</p>

@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - {% trans %}navbar.shop_data{% endtrans %}{% endblock %}
+
+{% block body %}
+    <div class="col-sm-1 col-md-2"></div>
+    <div class="background col-sm-10 col-md-8 p-sm-5">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <h2 class="mt-5 font-weight-normal text-center">{% trans %}navbar.shop_data{% endtrans %}</h2>
+
+        <div class="border border-secondary rounded">
+            {% form_theme shopForm 'bootstrap_4_layout.html.twig' %}
+            {{ form_start(shopForm) }}
+                <div class="text-center">
+                    <button type="submit" class="button">{% trans %}save{% endtrans %}</button>
+                </div>
+                <div class="d-md-inline-block px-sm-5" style="vertical-align: top;">
+                    {{ form_row(shopForm.name) }}
+                    {{ form_row(shopForm.logo) }}
+                </div>
+                <div class="d-md-inline-block">
+                    {% set shopLogo = shopData.getLogo %}
+                    {% if shopLogo is null %}
+                        {% set shopLogo = 'assets/img/emptyImage.png' %}
+                    {% endif %}
+                    <img src="{{ asset(shopLogo) }}" class="logoPreview">
+                </div>
+                <div class="px-sm-5">
+                    {{ form_row(shopForm.accountNumber) }}
+                    {{ form_row(shopForm.adminLangView) }}
+                </div>
+            {{ form_end(shopForm) }}
+        </div>
+
+        <div class="border border-secondary rounded mt-4">
+            <h3 class="font-weight-normal text-center mt-5">{% trans %}shop.sales{% endtrans %}</h3>
+            {% form_theme saleForm 'bootstrap_4_layout.html.twig' %}
+            {{ form_start(saleForm) }}
+                <div class="text-center px-sm-3">
+                    <button type="submit" class="button d-inline-block">{% trans %}shop.add_sale{% endtrans %}</button>
+                    <h4 class="font-weight-normal text-center d-inline-block">{% trans %}shop.new_sale{% endtrans %}</h4>
+                </div>
+                <div class="d-md-inline-block px-sm-5">
+                    <div class="row">
+                        <div class="col">{{ form_row(saleForm.productId) }}</div>
+                        <div class="col">{{ form_row(saleForm.lang) }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">{{ form_row(saleForm.startDate) }}</div>
+                        <div class="col">{{ form_row(saleForm.endDate) }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">{{ form_row(saleForm.info) }}</div>
+                        <div class="col">{{ form_row(saleForm.backImg) }}</div>
+                    </div>
+                </div>
+            {{ form_end(saleForm) }}
+
+            <h4 class="font-weight-normal text-center mt-5">{% trans %}shop.current_sales{% endtrans %}</h4>
+            {% for sale in sales %}
+                {% if sale.backImg is defined and sale.backImg is not null %}
+                    {% set backImg = asset('productsImages/' ~ sale.backImg) %}
+                {% else %}
+                    {% set backImg = asset('assets/img/background.png') %}
+                {% endif %}
+                <div class="cartItem px-sm-5 text-light" style="background-image: url({{ backImg }})">
+                    <div class="bg-dark border border-light rounded">
+                        <div class="mx-1 d-inline-block">
+                            {{sale.info}}
+                        </div>
+                        <br />
+                        <div class="mx-1 d-inline-block">
+                            {% trans %}product.product{% endtrans %} {{sale.productId.name}}
+                        </div>
+                        <div class="mx-1 d-inline-block">
+                            {% trans %}shop.sale_time_period{% endtrans %}:
+                            ({{sale.startDate|date('d/m/Y')}}
+                            -
+                            {% if sale.endDate is defined and sale.endDate is not null %}
+                                {{ sale.endDate|date('d/m/Y') }}
+                            {% endif %}
+                            )
+                        </div>
+                        {% if sale.lang is defined and sale.lang is not null %}
+                            <div class="mx-1 d-inline-block">
+                                [{{sale.lang}}]
+                            </div>
+                        {% endif %}
+                        <a class="mx-1 d-inline-block border border-secondary rounded p-1 m-2" href="{{ path('shop', {'deleteSaleId': sale.id}) }}">
+                            <img src="{{ asset('assets/img/bin.png') }}" class="imgTmp">
+                            {% trans %}cart.delete{% endtrans %}
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - {% trans %}navbar.log{% endtrans %}{% endblock %}
+
+{% block body %}
+    <div class="col-sm-1 col-md-2"></div>
+    <div class="main col-sm-10 col-md-8 p-sm-5">
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger">{% trans %}login_fail{% endtrans %}</div>
+            {% endif %}
+
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            <h2 class="mb-3 mt-5 font-weight-normal text-center">{% trans %}navbar.log{% endtrans %}</h2>
+
+            <label for="inputMail">E-mail</label>
+            <input type="text" value="{{ last_username }}" name="mail" id="inputMail" class="form-control" autocomplete="username" required autofocus>
+            <label for="inputPassword">Hasło</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+            <input type="hidden" name="_csrf_token"
+                value="{{ csrf_token('authenticate') }}"
+            >
+
+            {#
+                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                See https://symfony.com/doc/current/security/remember_me.html
+
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> Remember me
+                    </label>
+                </div>
+            #}
+            <button class="button" type="submit">
+                {% trans %}navbar.login{% endtrans %}
+            </button>
+        </form>
+    </div>
+{% endblock %}

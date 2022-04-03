@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - {% trans %}navbar.payment{% endtrans %}{% endblock %}
+
+{% block body %}
+<div class="main">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <h1 class="purchaseLabel">Twoje dane</h1>
+            {# {% form_theme registrationForm 'bootstrap_4_layout.html.twig' %} #}
+
+            <label for="inputfirstName">Imię</label>
+            <input type="text" name="firstName" id="inputfirstName" class="form-control" required autofocus>
+            <label for="inputLastName">Nazwisko</label>
+            <input type="text" name="lastName" id="inputLastName" class="form-control" required>
+            <label for="inputStreet">Ulica</label>
+            <input type="text" name="street" id="inputStreet" class="form-control" required>
+            <label for="inputNumber">Numer</label>
+            <input type="text" name="number" id="inputNumber" class="form-control" required>
+            <label for="inputZIP">Kod pocztowy</label>
+            <input type="text" name="ZIP" id="inputZIP" class="form-control" required>
+            <label for="inputCity">Miasto</label>
+            <input type="text" name="city" id="inputCity" class="form-control" required>
+            <label for="inputCountry">Kraj</label>
+            <input type="text" name="country" id="inputCountry" class="form-control" required>
+            <label for="inputEmail">E-mail</label>
+            <input type="text" name="email" id="inputEmail" class="form-control" required>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <h1 class="purchaseLabel">Wprowadź dane karty płatniczej</h1>
+            
+            <label for="inputCardNumber">Numer karty</label>
+            <input type="text" name="cardNumber" id="inputCardNumber" class="form-control" required autofocus>
+            <label for="inputDate">Data ważności karty</label>
+            <input type="text" name="date" id="inputDate" class="form-control" required>
+            <label for="inputCode">Kod CVV2 / CVC2 / PCSC</label>
+            <input type="text" name="code" id="inputCode" class="form-control" required>
+        </div>
+    </div>
+    <div class="text-center py-3">
+    <input type="checkbox" id="rules"> *Akceptuję warunki regulaminu i polityki prywatności.</br>
+        <button type="submit" class="button d-inline-block">Potwierdź zamówienie</button>
+    </div>
+    
+</div>
+{% endblock %}

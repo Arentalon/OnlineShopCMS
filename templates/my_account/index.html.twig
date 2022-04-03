@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - {% trans %}navbar.account{% endtrans %}{% endblock %}
+
+{% block body %}
+    <div class="col-sm-1 col-md-2"></div>
+    <div class="main col-sm-10 col-md-8 p-sm-2">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <h2 class="mt-5 font-weight-normal text-center">{% trans %}navbar.account{% endtrans %}</h2>
+
+        {% form_theme myAccountForm 'bootstrap_4_layout.html.twig' %}
+        {{ form_start(myAccountForm) }}
+            <div class="text-center py-3">
+                <button type="submit" class="button">{% trans %}save{% endtrans %}</button>
+            </div>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-4">
+                    <h3 class="font-weight-normal text-center">{% trans %}account.personal_data{% endtrans %}</h3>
+                    {{ form_row(myAccountForm.mail) }}
+                    {{ form_row(myAccountForm.name) }}
+                    {{ form_row(myAccountForm.surname) }}
+                    {{ form_row(myAccountForm.lang) }}
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-4">
+                    <h3 class="font-weight-normal text-center">{% trans %}account.address{% endtrans %}</h3>
+                    <h5 class="mb-3 font-weight-normal text-center">{% trans %}account.optional{% endtrans %}</h5>
+                    {{ form_row(myAccountForm.country) }}
+                    {{ form_row(myAccountForm.street) }}
+                    {{ form_row(myAccountForm.nr) }}
+                    {{ form_row(myAccountForm.city) }}
+                    {{ form_row(myAccountForm.code) }}
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        {{ form_end(myAccountForm) }}
+        {% form_theme passForm 'bootstrap_4_layout.html.twig' %}
+        {{ form_start(passForm) }}
+            <div class="text-center py-3">
+                <button type="submit" class="button">{% trans %}account.change_pass{% endtrans %}</button>
+            </div>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-4">
+                    <h3 class="mt-5 font-weight-normal text-center">{% trans %}account.pass_change{% endtrans %}</h3>
+                    {{ form_row(passForm.plainPassword) }}
+                </div>
+            </div>
+        {{ form_end(passForm) }}
+    </div>
+
+{% endblock %}

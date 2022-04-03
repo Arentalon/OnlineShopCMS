@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale|split('_')[0] }}">
+    <head>
+        <meta charset="UTF-8">
+        {% set shopName = shopData.getName %}
+        {% if shopName is null %}
+            {% set shopName = 'shop' %}
+        {% endif %}
+
+        {% set shopLogo = shopData.getLogo %}
+        {% if shopLogo is null %}
+            {% set shopLogo = 'assets/img/emptyImage.png' %}
+        {% endif %}
+        <title>{% block title %}{{ shopName }}{% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle`
+            and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets/css/sidebar.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets/css/product.css') }}">
+            <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.1/css/all.css">
+        {% endblock %}
+    </head>
+
+    <body>
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-xl navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="{{ path('index') }}">
+                    <img src="{{ asset(shopLogo) }}">
+                    <span class="d-md-inline">{{ shopName }}</span>
+                </a>
+
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                    <ul class="mr-auto navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.get('_route') == 'index' %}active{% endif %}" href="{{ path('index') }}">
+                                {% trans %}navbar.home{% endtrans %}
+                            </a>
+                        </li>
+                        {% if app.user %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li class="nav-item">
+                                    <a class="nav-link {% if app.request.get('_route') == 'shop' %}active{% endif %}" href="{{ path('shop') }}">
+                                        {% trans %}navbar.shop_data{% endtrans %}
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link {% if app.request.get('_route') == 'cart' %}active{% endif %}" href="{{ path('cart') }}">
+                                        {% trans %}navbar.cart{% endtrans %}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {% if app.request.get('_route') == 'history_product' %}active{% endif %}" href="{{ path('history_product') }}">
+                                        {% trans %}navbar.story{% endtrans %}
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if app.request.get('_route') == 'my_account' %}active{% endif %}" href="{{ path('my_account') }}">
+                                    {% trans %}navbar.account{% endtrans %}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_logout') }}">
+                                    {% trans %}navbar.logout{% endtrans %}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if app.request.get('_route') == 'app_login' %}active{% endif %}" href="{{ path('app_login') }}">
+                                    {% trans %}navbar.login{% endtrans %}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if app.request.get('_route') == 'app_register' %}active{% endif %}" href="{{ path('app_register') }}">
+                                    {% trans %}navbar.register{% endtrans %}
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <form action="{{ path('index') }}" method="get" class="d-flex align-right mr-4">
+                     <input class="form-control mx-2" type="search" placeholder="{% trans %}navbar.research{% endtrans %}" aria-label="Search" name="search" {% if search is defined and search is not null %}value="{{ search }}" {% endif %}>
+                    <button class="btn btn-outline-secondary" type="submit">{% trans %}navbar.search{% endtrans %}</button>
+                </form>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggle" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="row">
+            {% block body %}{% endblock %}
+        </div>
+        
+        <footer>
+            
+        </footer>
+
+        {% block javascripts %}
+            <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+            <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+            <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+            <script src="{{ asset('assets/js/sidebar.js') }}"></script>
+            <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('assets/js/ProductController.js') }}"></script>
+            <script src="{{ asset('assets/js/saleSlider.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

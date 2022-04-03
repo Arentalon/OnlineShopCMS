@@ -1,0 +1,197 @@
+body {
+    background-color: #051a30;
+    color: white;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.row {
+    margin: 0px;
+}
+
+.navbar {
+    position: sticky !important;
+    top: 0px;
+    background-color: #051a30;
+    z-index: 10;
+}
+
+.navbar-brand > img {
+    height: 40px;
+    margin: 5px;
+}
+
+.navbar-brand {
+    margin: 0px;
+    margin-right: 15px;
+}
+
+/* fields for edit product description */
+.productsDescription input {
+    width: 200px;
+    height: 20px;
+}
+
+.purchase {
+    font-size: 15px;
+    width:800px;
+    float:left;
+    line-height: 30px;
+    margin-left: 600px;
+    margin-bottom: 50px;
+    background: rgb(75, 73, 100);
+    border: 2px solid #555;
+}
+
+.purchaseLabel {
+    margin: 20px;
+    border-left: 7px solid #7cbf00;
+    color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 10px 0 10px 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: left;
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+.purchaseData {
+    margin-top: 10px;
+    color: rgb(255, 255, 255);
+    font-size: 1rem;
+    padding: 10px 0 10px 20px;
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+.purchase input {
+    margin-top: 10px;
+    margin-left: 50px;
+    width: 200px;
+    height: 20px;
+}
+
+.purchase span {
+    margin-top: 20px;
+    margin-left: 40px;
+    position: relative; 
+    line-height: 60px;
+    display: inline-block;
+    width: 90%;
+    list-style:none;
+    border-bottom: 2px solid rgba(72, 147, 218, 0.3);
+}
+
+.main {
+    background-color: #4b4964;
+    border-radius: 12px;
+    padding-bottom: 60px !important;
+    margin-bottom: 60px;
+}
+
+.button {
+    border-radius: 10px;
+    padding: 8px;
+    margin: 4px;
+    text-align: center;
+    display: block;
+    background-color: #051a30;
+    text-decoration: none;
+    color: #fff;
+    border-width: 0px;
+    margin-top: 20px;
+}
+
+.button:hover {
+    background: rgba(6, 31, 57, 0.4);
+    color: #fff;
+    transition: 300ms;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+form input, select {
+    background-color: #bbb !important;
+    margin-bottom: 10px;
+}
+
+.formInlineContainer > div {
+    display: inline-block;
+}
+
+.cartItem {
+    background-color: #ccc;
+    color: #051a30;
+    border-radius: 12px;
+    margin: 15px;
+    padding: 10px;
+}
+
+.imgTmp {
+    height: 40px;
+    margin: 5px;
+    /*border: 2px solid #051a30;*/
+}
+
+.logoPreview {
+    margin-left: 80px;
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+}
+
+label.required:before {
+    color: red;
+    content: "* ";
+}
+
+.mySlides {
+    display: none;
+    margin: 0px -15px;
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0px 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.isActive, .dot:hover {
+    background-color: #717171;
+}
+
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+/* .form-control {
+    width: 500px !important;
+} */

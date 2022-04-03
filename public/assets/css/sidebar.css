@@ -1,0 +1,178 @@
+#sidebar-wrapper {
+    z-index: 1;
+    /*position: fixed;*/
+    /*left: 0px;*/
+    /*width: 220px;*/
+    height: 100%;
+}
+
+/* backlight under the text on hover // lines between categories objects */
+.sidebar-nav li {
+    position: relative; 
+    line-height: 20px;
+    display: inline-block;
+    width: 100%;
+    list-style:none;
+    border-bottom: 1px solid rgba(100,100,100,0.3);
+}
+
+/* color around the text on hover */
+.sidebar-nav li:hover{
+  background: skyblue !important;
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* style of categories inside  */
+.sidebar-nav li a {
+    display: block;
+    color: #ddd;
+    text-decoration: none;
+    padding: 10px 15px 10px 15px;    
+}
+
+/* style of category title */
+.sidebar-header {
+    text-align: center;
+    font-size: 20px;
+    position: relative;
+    width: 100%;
+    display: inline-block;
+}
+/* gradient of category title*/
+.sidebar-brand {
+    height: 65px;
+    position: relative;
+    background:#212531;
+    background: linear-gradient(to right bottom, #2f3441 30%, #212531 50%);
+    padding-top: 1em;
+}
+
+/* style of sort main title */
+.sidebar-header-sort {
+  text-align: center;
+  font-size: 15px;
+  position: relative;
+  width: 100%;
+  display: inline-block;
+}
+/* gradient of sort main title*/
+.sidebar-brand-sort {
+  height: 30px;
+  position: relative;
+  background:#2f3441;
+  /* background: linear-gradient(to right bottom, #2f3441 30%, #212531 50%); */
+  padding-top: 0.2em;
+}
+
+/* lines between sort */
+.sidebar-sort li {
+  position: relative; 
+  line-height: 20px;
+  display: inline-block;
+  width: 100%;
+  list-style:none;
+  border-bottom: 1px solid rgba(100,100,100,0.3);
+}
+
+/* style of sort title after main title */
+.sidebar-sort sortTitle {
+  display: block;
+  color: #ddd;
+  padding: 10px 15px 10px 15px;    
+  text-align: center;
+}
+
+/* style of sort inside */
+.sidebar-sort sort {
+  display: block;
+  color: #ddd;
+  text-decoration: none;
+  padding: 10px 15px 10px 15px;    
+}
+
+/* color of category title */
+.sidebar-brand a {
+    color: rgb(255, 255, 255);
+}
+/* different color of categorie when hover the mouse  */
+.sidebar-brand a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+/*Fontawesome icons*/
+
+/* defining the right font-family/font-face for each style */
+.icon-solid::before,
+.icon-regular::before,
+.icon-light::before {
+  font-family: "Font Awesome 5 Pro";
+}
+
+.icon-brand::before {
+  font-family: "Font Awesome 5 Brands";
+}
+
+/* defining the right weight for each style */
+.icon-solid::before {
+  font-weight: 900;
+}
+
+.icon-regular::before {
+  font-weight: 400;
+}
+
+.icon-light::before {
+  font-weight: 300;
+}
+
+.icon-brand::before {
+  font-weight: 400;
+}
+
+/* defining the right unicode values for each icon */
+.icon-apple::before {
+  content: "\f5d1";
+}
+
+.icon-carrot::before {
+  content: "\f787";
+}
+
+.icon-bread::before {
+  content: "\f7eb"
+}
+
+.icon-dairy::before {
+  content: "\f6e1"
+}
+
+.icon-peanuts::before {
+  content: "\f6ae"
+}
+
+.icon-pencil::before {
+  /* color: #5870b9; */
+  content: "\f303"
+}
+
+.icon-plus::before {
+  content: "\f067"
+}
+
+.icon::before {
+  margin-right: 0.5rem;
+}
+
+.selected {
+    background: #0c5460 !important;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.sidebar-nav li a {
+    display: inline-block;
+}

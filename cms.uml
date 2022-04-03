@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>PHP</ID>
+  <OriginalElement>E:/Program Files/xampp/htdocs/cms</OriginalElement>
+  <nodes>
+    <node x="132.0" y="3065.0">E:/Program Files/xampp/htdocs/cms/config</node>
+    <node x="624.0" y="3065.0">E:/Program Files/xampp/htdocs/cms/src/Form</node>
+    <node x="382.0" y="3065.0">E:/Program Files/xampp/htdocs/cms/src/Entity</node>
+    <node x="825.0" y="2749.5">\App\Controller\MyAccountController</node>
+    <node x="587.0" y="1900.0">\Symfony\Bundle\FrameworkBundle\Controller\AbstractController</node>
+    <node x="104.5" y="336.0">\Symfony\Component\HttpKernel\RebootableInterface</node>
+    <node x="834.0" y="3065.0">E:/Program Files/xampp/htdocs/cms/var</node>
+    <node x="879.0" y="2591.0">\App\Controller\RegistrationController</node>
+    <node x="2192.0" y="2020.0">E:/Program Files/xampp/htdocs/cms/templates</node>
+    <node x="512.0" y="2741.5">\App\Controller\PaymentController</node>
+    <node x="1878.0" y="2020.0">E:/Program Files/xampp/htdocs/cms/migrations</node>
+    <node x="338.0" y="0.0">\Symfony\Component\HttpKernel\HttpKernelInterface</node>
+    <node x="427.0" y="2829.5">\App\Controller\ProductController</node>
+    <node x="2341.0" y="2020.0">E:/Program Files/xampp/htdocs/cms/src/Security</node>
+    <node x="308.5" y="171.0">\Symfony\Component\HttpKernel\KernelInterface</node>
+    <node x="767.0" y="2836.5">\App\Controller\SecurityController</node>
+    <node x="616.0" y="2924.5">\App\Controller\IndexController</node>
+    <node x="257.0" y="3065.0">E:/Program Files/xampp/htdocs/cms/vendor</node>
+    <node x="278.0" y="605.0">\Symfony\Component\HttpKernel\Kernel</node>
+    <node x="733.0" y="3065.0">E:/Program Files/xampp/htdocs/cms/bin</node>
+    <node x="7.0" y="3065.0">E:/Program Files/xampp/htdocs/cms/public</node>
+    <node x="635.5" y="1817.0">\Symfony\Contracts\Service\ServiceSubscriberInterface</node>
+    <node x="176.75" y="1899.0">\App\Kernel</node>
+    <node x="507.0" y="3065.0">E:/Program Files/xampp/htdocs/cms/tests</node>
+    <node x="1705.0" y="2020.0">E:/Program Files/xampp/htdocs/cms/translations</node>
+    <node x="2035.0" y="2020.0">E:/Program Files/xampp/htdocs/cms/src/Repository</node>
+    <node x="483.0" y="2656.5">\App\Controller\CartController</node>
+    <node x="586.5" y="336.0">\Symfony\Component\HttpKernel\TerminableInterface</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="\Symfony\Component\HttpKernel\KernelInterface" target="\Symfony\Component\HttpKernel\HttpKernelInterface">
+      <point x="0.0" y="-192.0" />
+      <point x="0.0" y="60.5" />
+    </edge>
+    <edge source="\App\Controller\MyAccountController" target="\Symfony\Bundle\FrameworkBundle\Controller\AbstractController">
+      <point x="0.0" y="-27.0" />
+      <point x="917.0" y="2729.0" />
+      <point x="860.3571428571429" y="2729.0" />
+      <point x="96.85714285714289" y="324.5" />
+    </edge>
+    <edge source="\App\Kernel" target="\Symfony\Component\HttpKernel\Kernel">
+      <point x="53.25" y="-38.0" />
+      <point x="336.5" y="1874.0" />
+      <point x="437.5" y="1874.0" />
+      <point x="0.0" y="622.0" />
+    </edge>
+    <edge source="\App\Controller\RegistrationController" target="\Symfony\Bundle\FrameworkBundle\Controller\AbstractController">
+      <point x="0.0" y="-60.5" />
+      <point x="1029.5" y="2569.0" />
+      <point x="901.7857142857142" y="2569.0" />
+      <point x="145.28571428571422" y="324.5" />
+    </edge>
+    <edge source="\Symfony\Component\HttpKernel\Kernel" target="\Symfony\Component\HttpKernel\RebootableInterface">
+      <point x="-106.33333333333331" y="-622.0" />
+      <point x="331.1666666666667" y="580.0" />
+      <point x="196.5" y="580.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="\Symfony\Component\HttpKernel\Kernel" target="\Symfony\Component\HttpKernel\KernelInterface">
+      <point x="0.0" y="-622.0" />
+      <point x="0.0" y="192.0" />
+    </edge>
+    <edge source="\App\Controller\IndexController" target="\Symfony\Bundle\FrameworkBundle\Controller\AbstractController">
+      <point x="0.0" y="-27.0" />
+      <point x="0.0" y="324.5" />
+    </edge>
+    <edge source="\App\Controller\ProductController" target="\Symfony\Bundle\FrameworkBundle\Controller\AbstractController">
+      <point x="0.0" y="-27.0" />
+      <point x="570.5" y="2812.0" />
+      <point x="705.0714285714284" y="2813.0" />
+      <point x="-48.42857142857156" y="324.5" />
+    </edge>
+    <edge source="\App\Controller\CartController" target="\Symfony\Bundle\FrameworkBundle\Controller\AbstractController">
+      <point x="0.0" y="-27.0" />
+      <point x="555.0" y="2644.0" />
+      <point x="611.2142857142858" y="2645.0" />
+      <point x="-145.28571428571422" y="324.5" />
+    </edge>
+    <edge source="\App\Controller\PaymentController" target="\Symfony\Bundle\FrameworkBundle\Controller\AbstractController">
+      <point x="0.0" y="-27.0" />
+      <point x="596.0" y="2726.0" />
+      <point x="659.6428571428571" y="2727.0" />
+      <point x="-96.85714285714289" y="324.5" />
+    </edge>
+    <edge source="\Symfony\Bundle\FrameworkBundle\Controller\AbstractController" target="\Symfony\Contracts\Service\ServiceSubscriberInterface">
+      <point x="0.0" y="-324.5" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="\Symfony\Component\HttpKernel\Kernel" target="\Symfony\Component\HttpKernel\TerminableInterface">
+      <point x="106.33333333333337" y="-622.0" />
+      <point x="543.8333333333334" y="580.0" />
+      <point x="688.0" y="580.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="\App\Controller\SecurityController" target="\Symfony\Bundle\FrameworkBundle\Controller\AbstractController">
+      <point x="0.0" y="-38.0" />
+      <point x="859.5" y="2819.0" />
+      <point x="809.9285714285713" y="2818.0" />
+      <point x="48.42857142857133" y="324.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.726645264847512" x="1042.956919846386" y="1387.8291570297483" />
+  <SelectedNodes>
+    <node>E:/Program Files/xampp/htdocs/cms/config</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constants</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

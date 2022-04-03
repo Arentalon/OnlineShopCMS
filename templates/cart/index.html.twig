@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - {% trans %}navbar.cart{% endtrans %}{% endblock %}
+
+{% block body %}
+    <div class="col-sm-1"></div>
+    <div class="main col-sm-10 p-sm-2">
+        <h2 class="mb-3 mt-5 font-weight-normal text-center">{% trans %}navbar.cart{% endtrans %}</h2>
+        {% if productsInProgress is defined and productsInProgress is not empty %}
+            <h3 class="font-weight-normal text-center">{% trans %}cart.in_progress{% endtrans %}</h3>
+            {% if allProductsInProgressPrice is defined and allProductsInProgressPrice is not null and allProductsInProgressPrice is not same as(0) %}
+            <h4 class="font-weight-normal text-center">{% trans %}cart.total_price{% endtrans %}: {{ allProductsInProgressPrice }} zł</h4>
+            {% endif %}
+
+            <div>
+                {% for productInProgress in productsInProgress %}
+
+                    <div class="cartItem">
+                        <div class="mx-3 d-inline-block">
+                            <img src="{{ asset('productsImages/' ~ productInProgress.img) }}" class="imgTmp">
+                        </div>
+                        <div class="mx-3 d-inline-block">
+                            {{productInProgress.name}}
+                        </div>
+                        <div class="mx-3 d-inline-block">
+                            {% trans %}form.product.amount{% endtrans %}: {{productInProgress.amount}}
+                        </div>
+                        <div class="mx-3 d-inline-block">
+                            {% trans %}form.product.price{% endtrans %}: {{productInProgress.allPrice}} zł ({{productInProgress.price}} {{productInProgress.priceUnit}})
+                        </div>
+                        <div class="mx-5 d-inline-block">
+
+                        </div>
+                        <div class="ml-3 d-inline-block">
+                            <a href="{{ path('show_product', {'productId': productInProgress.id, 'isEditMode': 'false', 'isCreateMode': 'false'})  }}" type="submit">
+                                <img src="{{ asset('assets/img/ask.png') }}" class="imgTmp">
+                            </a>
+                            {% trans %}cart.see{% endtrans %}
+                        </div>
+                    </div>
+                {% endfor %}
+{#                    <a href="#" class="button d-inline-block">{% trans %}cart.cancel{% endtrans %}</a>#}
+            </div>
+            <h3 class="mb-3 font-weight-normal text-center">{% trans %}cart.new_cart{% endtrans %}</h3>
+        {% endif %}
+
+        {% if allProductsInCartPrice is defined and allProductsInCartPrice is not null and allProductsInCartPrice is not same as(0) %}
+        <h4 class="font-weight-normal text-center">{% trans %}cart.total_price{% endtrans %}: {{ allProductsInCartPrice }} zł</h4>
+        {% endif %}
+
+        <div>
+        {% for productInCart in productsInCart %}
+            <div class="cartItem">
+                <div class="mx-3 d-inline-block">
+                    <img src="{{ asset('productsImages/' ~ productInCart.img) }}" class="imgTmp">
+                </div>
+                <div class="mx-3 d-inline-block">
+                    {{productInCart.name}}
+                </div>
+                <div class="mx-3 d-inline-block">
+                    {% trans %}form.product.amount{% endtrans %}: {{productInCart.amount}}
+                </div>
+                <div class="mx-3 d-inline-block">
+                    {% trans %}form.product.price{% endtrans %}: {{productInCart.allPrice}} zł ({{productInCart.price}} {{productInCart.priceUnit}})
+                </div>
+                <div class="mx-5 d-inline-block">
+
+                </div>
+                <div class="ml-3 d-inline-block">
+                    <a href="{{ path('show_product', {'productId': productInCart.id, 'isEditMode': 'false', 'isCreateMode': 'false'})  }}" type="submit">
+                    <img src="{{ asset('assets/img/ask.png') }}" class="imgTmp">
+                    </a>
+                        {% trans %}cart.see{% endtrans %}
+                    
+                </div>
+                <div class="ml-3 d-inline-block">
+                        <img src="{{ asset('assets/img/bin.png') }}" id="{{productInCart.id}}" onclick="deleteProductFromCart(this)" class="imgTmp pointer">
+                        {% trans %}cart.delete{% endtrans %}
+                </div>
+            </div>
+        {% endfor %}
+        {% if productsInCart is not empty and (productsInProgress is not defined or productsInProgress is empty) %}
+            <a href="{{ path('payment') }}"><button type="submit" class="button d-inline-block">{% trans %}cart.order{% endtrans %}</button></a>
+        {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

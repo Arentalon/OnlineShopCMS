@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - {% trans %}navbar.product_edit{% endtrans %}{% endblock %}
+
+{% block body %}
+    <div class="col-md-1 col-xl-2"></div>
+        <div class="background col-md-10 col-xl-8 p-md-2">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            <h2 class="mt-5 font-weight-normal text-center">{% trans %}navbar.product_edit{% endtrans %}</h2>
+
+            {% form_theme productForm 'bootstrap_4_layout.html.twig' %}
+            {{ form_start(productForm) }}
+                <div class="text-center">
+                    <button type="submit" class="button">{% trans %}save{% endtrans %}</button>
+                </div>
+                {% if productForm.vars.value.img is defined and productForm.vars.value.img is not null %}
+                    {% set imgSrc = asset('productsImages/' ~ productForm.vars.value.img) %}
+                {% else %}
+                    {% set imgSrc = asset('assets/img/emptyImage.png') %}
+                {% endif %}
+                <div class="productsDescription d-md-inline-block">
+                    <img src="{{ imgSrc }}"/>
+                    <div class="px-5 mt-0 pt-0">
+                        {{ form_row(productForm.fileUpload) }}
+                    </div>
+                </div>
+                <div class="d-md-inline-block px-5 px-md-0" style="vertical-align: top;">
+                    {{ form_row(productForm.name) }}
+                    {{ form_row(productForm.price) }}
+                    {{ form_row(productForm.priceUnit) }}
+                    {{ form_row(productForm.amount) }}
+                    {{ form_row(productForm.categoryId) }}
+                    {{ form_row(productForm.startDate) }}
+                    {{ form_row(productForm.endDate) }}
+                    {{ form_row(productForm.isActive) }}
+                </div>
+                <div class="px-sm-5">
+                    {{ form_row(productForm.description) }}
+                    {{ form_row(productForm.producer) }}
+                    {{ form_row(productForm.lang) }}
+                </div>
+            {{ form_end(productForm) }}
+        </div>
+    </div>
+{% endblock %}

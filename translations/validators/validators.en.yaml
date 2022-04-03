@@ -1,0 +1,12 @@
+change_password:
+  invalid_message: The passwords must be the same
+product:
+  max_size: The_size_of_the_photo_cannot_exceed_3_MB!
+  mime: Supported_file_format_must_be_image!
+registration:
+  agreement: You must accept the terms of use
+  pass_empty: Enter the password
+  pass_min: Your password must be at least {{limit}} characters long
+  pass_max: Your password cannot exceed {{limit}} characters
+  pass_unique: The passwords must be the same
+  mail_unique: There is already a user with this e-mail address
