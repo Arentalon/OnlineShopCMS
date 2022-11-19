@@ -12,8 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="product", indexes={@ORM\Index(name="fk_Product_categoryId", columns={"categoryId"})})
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  */
-class Product
-{
+class Product {
     public const SORT_TYPE = [
         'priceAsc' => ['price' => 'ASC'],
         'priceDesc' => ['price' => 'DESC'],
@@ -132,167 +131,139 @@ class Product
      */
     private $sales;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->sales = new ArrayCollection();
     }
 
-    public function getProductId(): ?int
-    {
+    public function getProductId(): ?int {
         return $this->productId;
     }
 
-    public function getName(): ?string
-    {
+    public function getName(): ?string {
         return $this->name;
     }
 
-    public function setName(string $name): self
-    {
+    public function setName(string $name): self {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getStartDate(): ?\DateTimeInterface
-    {
+    public function getStartDate(): ?\DateTimeInterface {
         return $this->startDate;
     }
 
-    public function setStartDate(\DateTimeInterface $startDate): self
-    {
+    public function setStartDate(\DateTimeInterface $startDate): self {
         $this->startDate = $startDate;
 
         return $this;
     }
 
-    public function getEndDate(): ?\DateTimeInterface
-    {
+    public function getEndDate(): ?\DateTimeInterface {
         return $this->endDate;
     }
 
-    public function setEndDate(?\DateTimeInterface $endDate): self
-    {
+    public function setEndDate(?\DateTimeInterface $endDate): self {
         $this->endDate = $endDate;
 
         return $this;
     }
 
-    public function getPrice(): ?float
-    {
+    public function getPrice(): ?float {
         return $this->price;
     }
 
-    public function setPrice(float $price): self
-    {
+    public function setPrice(float $price): self {
         $this->price = $price;
 
         return $this;
     }
 
-    public function getAmount(): ?int
-    {
+    public function getAmount(): ?int {
         return $this->amount;
     }
 
-    public function setAmount(int $amount): self
-    {
+    public function setAmount(int $amount): self {
         $this->amount = $amount;
 
         return $this;
     }
 
-    public function getImg(): ?string
-    {
+    public function getImg(): ?string {
         return $this->img;
     }
 
-    public function setImg(string $img): self
-    {
+    public function setImg(string $img): self {
         $this->img = $img;
 
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
+    public function getDescription(): ?string {
         return $this->description;
     }
 
-    public function setDescription(string $description): self
-    {
+    public function setDescription(string $description): self {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getAmountOfBought(): ?int
-    {
+    public function getAmountOfBought(): ?int {
         return $this->amountOfBought;
     }
 
-    public function setAmountOfBought(int $amountOfBought): self
-    {
+    public function setAmountOfBought(int $amountOfBought): self {
         $this->amountOfBought = $amountOfBought;
 
         return $this;
     }
 
-    public function getIsActive(): ?bool
-    {
+    public function getIsActive(): ?bool {
         return $this->isActive;
     }
 
-    public function setIsActive(bool $isActive): self
-    {
+    public function setIsActive(bool $isActive): self {
         $this->isActive = $isActive;
 
         return $this;
     }
 
-    public function getCategoryId(): ?Category
-    {
+    public function getCategoryId(): ?Category {
         return $this->categoryId;
     }
 
-    public function setCategoryId(?Category $categoryId): self
-    {
+    public function setCategoryId(?Category $categoryId): self {
         $this->categoryId = $categoryId;
 
         return $this;
     }
 
-    public function getProducer(): ?string
-    {
+    public function getProducer(): ?string {
         return $this->producer;
     }
 
-    public function setProducer(?string $producer): self
-    {
+    public function setProducer(?string $producer): self {
         $this->producer = $producer;
 
         return $this;
     }
 
-    public function getPriceUnit(): ?string
-    {
+    public function getPriceUnit(): ?string {
         return $this->priceUnit;
     }
 
-    public function setPriceUnit(?string $priceUnit): self
-    {
+    public function setPriceUnit(?string $priceUnit): self {
         $this->priceUnit = $priceUnit;
 
         return $this;
     }
 
-    public function getLang(): ?string
-    {
+    public function getLang(): ?string {
         return $this->lang;
     }
 
-    public function setLang(?string $lang): self
-    {
+    public function setLang(?string $lang): self {
         $this->lang = $lang;
 
         return $this;
@@ -301,13 +272,11 @@ class Product
     /**
      * @return Collection|Sale[]
      */
-    public function getSales(): Collection
-    {
+    public function getSales(): Collection {
         return $this->sales;
     }
 
-    public function addSale(Sale $sale): self
-    {
+    public function addSale(Sale $sale): self {
         if (!$this->sales->contains($sale)) {
             $this->sales[] = $sale;
             $sale->setProductId($this);
@@ -316,17 +285,15 @@ class Product
         return $this;
     }
 
-    public function removeSale(Sale $sale): self
-    {
+    public function removeSale(Sale $sale): self {
         if ($this->sales->removeElement($sale)) {
             // set the owning side to null (unless already changed)
             if ($sale->getProductId() === $this) {
-                $sale->setProductId(null);
+                // TODO Line below will throw error
+                // $sale->setProductId(null);
             }
         }
 
         return $this;
     }
-
-
 }
