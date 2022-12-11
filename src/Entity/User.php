@@ -3,8 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * User
@@ -14,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @method string getUserIdentifier()
  * @UniqueEntity(fields={"mail"}, message="registration.mail_unique")
  */
-class User implements UserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     public const LANGUAGES = [
         'Polski' => 'pl',
@@ -264,11 +265,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getSalt()
-    {
-        // TODO: Implement getSalt() method.
-    }
-
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
@@ -277,6 +273,10 @@ class User implements UserInterface
     public function __call($name, $arguments)
     {
         // TODO: Implement @method string getUserIdentifier()
+    }
+
+    public function getUserIdentifier(): string {
+        return $this->mail;
     }
 
     public function isVerified(): bool

@@ -43,7 +43,7 @@ class HistoryProduct
     private $amount;
 
     /**
-     * @var \History
+     * @var History
      *
      * @ORM\ManyToOne(targetEntity="History")
      * @ORM\JoinColumns({

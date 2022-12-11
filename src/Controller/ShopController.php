@@ -4,17 +4,21 @@ namespace App\Controller;
 
 use App\Entity\Sale;
 use App\Entity\Shop;
-use App\Form\NewSaleType;
 use App\Form\ShopType;
+use App\Form\NewSaleType;
 use App\Repository\SaleRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ShopController extends AbstractController
 {
+
+    public function __construct(private ManagerRegistry $doctrine) {}
+    
     /**
      * @Route("/shop", name="shop")
      * @param Request $request
@@ -29,7 +33,7 @@ class ShopController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->doctrine->getManager();
 
         // MAIN
         $form = $this->createForm(ShopType::class, $this->getShopData());
@@ -104,7 +108,7 @@ class ShopController extends AbstractController
 
     private function getShopData(): array
     {
-        $shopRepository = $this->getDoctrine()->getRepository(Shop::class);
+        $shopRepository = $this->doctrine->getRepository(Shop::class);
         /** @var Shop[] | null $shopData */
         $shopData = [
             'name' => $shopRepository->findOneBy(['attrName' => 'name']),

@@ -2,24 +2,29 @@
 
 namespace App\Controller;
 
-use App\Entity\Product;
-use App\Form\EditProductType;
-use App\Entity\CartItems;
 use App\Entity\Cart;
+use App\Entity\User;
+use App\Entity\Product;
+use App\Entity\CartItems;
+use App\Form\EditProductType;
 use App\Form\AddCartItemsType;
 use App\Repository\CartRepository;
-use App\Repository\CartItemsRepository;
 use App\Repository\ProductRepository;
+use App\Repository\CartItemsRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use phpDocumentor\Reflection\Types\Boolean;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProductController extends AbstractController
 {
+
+    public function __construct(private ManagerRegistry $doctrine) {}
+
     /** @var TranslatorInterface $translator */
     private $translator;
 
@@ -40,6 +45,7 @@ class ProductController extends AbstractController
     public function showProduct(Request $request, TranslatorInterface $translator, ProductRepository $productRepository, CartRepository $cartRepository, CartItemsRepository $cartItemsRepository, int $productId = null, string $isEditMode = null, string $isCreateMode = null, string $plus = 'false', float $value = 0.5): Response
     {
         $this->translator = $translator;
+        /** @var User $user */
         $user = $this->getUser();
         $isAdmin = (in_array("ROLE_ADMIN", $user ? $user->getRoles() : []));
 
@@ -99,7 +105,7 @@ class ProductController extends AbstractController
     }
 
     public function upsert($obj) {
-        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager = $this->doctrine->getManager();
         $entityManager->persist($obj);
         $entityManager->flush(); 
     }
@@ -110,7 +116,7 @@ class ProductController extends AbstractController
         $productForm->handleRequest($request);
 
         if ($productForm->isSubmitted() && $productForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->doctrine->getManager();
             /** @var UploadedFile $imageFileName */
             $imageFileName = $productForm->get('fileUpload')->getData();
             if ($imageFileName) {

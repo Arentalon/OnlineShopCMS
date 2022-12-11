@@ -6,28 +6,27 @@ use App\Entity\Cart;
 use App\Entity\Shop;
 use App\Entity\User;
 use App\Form\PaymentType;
+use App\Security\OrderVerifier;
+use App\Service\CartItemsService;
 use App\Repository\CartRepository;
 use App\Repository\ShopRepository;
 use App\Repository\UserRepository;
-use App\Security\OrderVerifier;
-use App\Service\CartItemsService;
+use Symfony\Component\Mime\Address;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class PaymentController extends AbstractController
 {
-    private OrderVerifier $orderVerifier;
-
-    public function __construct(OrderVerifier $orderVerifier)
-    {
-        $this->orderVerifier = $orderVerifier;
-    }
+    public function __construct(
+        private OrderVerifier $orderVerifier, 
+        private ManagerRegistry $doctrine
+    ) {}
 
     /**
      * @Route("/payment", name="payment")
@@ -67,7 +66,7 @@ class PaymentController extends AbstractController
         $form = $this->createForm(PaymentType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->doctrine->getManager();
             $cart->setStatus(Cart::STATUS_CLOSED);
             $em->persist($cart);
             $em->persist($user);

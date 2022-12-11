@@ -2,23 +2,29 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
-use App\Entity\Product;
 use App\Entity\Sale;
 use App\Entity\Shop;
+use App\Entity\Product;
+use App\Entity\Category;
 use App\Form\CategoryType;
-use App\Repository\ProductRepository;
-use App\Repository\CategoryRepository;
 use App\Repository\SaleRepository;
 use App\Repository\ShopRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ProductRepository;
+use App\Repository\CategoryRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class IndexController extends AbstractController
 {
+
+    public function __construct(
+        private ManagerRegistry $doctrine
+    ) {}
+
     /**
      * @Route("/", name="index")
      * @Route("/index_controller/{categoryId}", name="index_controller")
@@ -41,7 +47,7 @@ class IndexController extends AbstractController
         $categoryId = null
     ): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager = $this->doctrine->getManager();
         $user = $this->getUser();
         $isAdmin = (in_array("ROLE_ADMIN", $user ? $user->getRoles() : []));
 

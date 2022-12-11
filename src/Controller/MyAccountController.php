@@ -3,21 +3,24 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\EventSubscriber\UserLocaleSubscriber;
-use App\Form\ChangePasswordType;
 use App\Form\MyAccountType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Form\ChangePasswordType;
+use Doctrine\Persistence\ManagerRegistry;
+use App\EventSubscriber\UserLocaleSubscriber;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class MyAccountController extends AbstractController
 {
+    public function __construct(private ManagerRegistry $doctrine) {}
+
     /**
      * @Route("/my/account", name="my_account")
      * @param Request $request
@@ -42,7 +45,7 @@ class MyAccountController extends AbstractController
         $passForm = $this->createForm(ChangePasswordType::class, $user);
         $passForm->handleRequest($request);
 
-        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager = $this->doctrine->getManager();
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($user);
             $entityManager->flush();

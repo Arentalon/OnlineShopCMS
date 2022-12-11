@@ -29,7 +29,7 @@ class CartItems
     private $amount;
 
     /**
-     * @var \Cart
+     * @var Cart
      *
      * @ORM\ManyToOne(targetEntity="Cart")
      * @ORM\JoinColumns({
@@ -39,7 +39,7 @@ class CartItems
     private $cartId;
 
     /**
-     * @var \Product
+     * @var Product
      *
      * @ORM\ManyToOne(targetEntity="Product")
      * @ORM\JoinColumns({
