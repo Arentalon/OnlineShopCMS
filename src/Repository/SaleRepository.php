@@ -19,6 +19,14 @@ class SaleRepository extends ServiceEntityRepository
         parent::__construct($registry, Sale::class);
     }
 
+    public function getSales() {
+        $builder = $this->createQueryBuilder('s');
+        $builder->where('s.startDate < :now AND ((s.endDate IS NOT NULL AND s.endDate > :now) OR s.endDate IS NULL)');
+        $builder->setParameter('now', new \DateTime());
+
+        return $builder->getQuery()->getResult() ?? [];
+    }
+
     // /**
     //  * @return Sale[] Returns an array of Sale objects
     //  */

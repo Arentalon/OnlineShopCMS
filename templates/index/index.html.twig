@@ -16,11 +16,11 @@
                     <a href="{{ path('index_controller', {'categoryId': category.categoryId})  }}" type="submit">
                         {{ category.name }}
                     </a>
-                    <a href="{{ path('index', {'toggleCategoryId': category.categoryId}) }}" style="float: right">
+                    {# <a href="{{ path('index', {'toggleCategoryId': category.categoryId}) }}" style="float: right">
                         {% if isAdmin %}
                             <input type="checkbox" {% if category.isActive %}checked="checked"{% endif %}>
                         {% endif %}
-                    </a>
+                    </a> #}
                 </li>
                 </br>
             {% endfor %}
@@ -133,6 +133,41 @@
                     </div>
                 </div>
             {% endif %}
+        </div>
+    </div>
+    <div class="footer">
+        <div class="col-md-1"></div>
+        <div class="col-md-2"></div>
+        <div class="pagination">
+            <a class="pagination-btn"
+                href="{{ 
+                    path(
+                        'index_controller', 
+                        {
+                            'categoryId': categoryId,
+                            'sortType': sortType, 
+                            'search': search, 
+                            'page': max(page - 1, 0), 
+                            'limit': limit
+                        }
+                    )
+                }}"
+            ><</a>
+            <div class="pagination-btn pag-btn-is-active">{{ page + 1 }}</div>
+            <a class="pagination-btn"
+                href="{{ 
+                    path(
+                        'index_controller', 
+                        {
+                            'categoryId': categoryId,
+                            'sortType': sortType, 
+                            'search': search, 
+                            'page': min(page + 1, (productsCount / limit)|round(0, 'floor')), 
+                            'limit': limit
+                        }
+                    )
+                }}"
+            >></a>
         </div>
     </div>
 
