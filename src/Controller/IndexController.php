@@ -45,42 +45,24 @@ class IndexController extends AbstractController
         ShopRepository $shopRepository,
         SaleRepository $saleRepository,
         $categoryId = null
-    ): Response
-    {
+    ): Response {
         $entityManager = $this->doctrine->getManager();
         $user = $this->getUser();
         $isAdmin = (in_array("ROLE_ADMIN", $user ? $user->getRoles() : []));
 
-        $sortType = $request->query->get('sortType');
-        if (null !== $sortType) {
-            $products = $productRepository->findBy([], Product::SORT_TYPE[$sortType]);
-        } else {
-            $products = $productRepository->findAll();
-        }
+        $sortType = $request->query->get('sortType') ?? 'timeDesc';
+        $queryString = $request->query->get('search');
+        $page = $request->query->get('page') ?? 0;
+        $limit = $request->query->get('limit') ?? 25;
 
-        $searchProduct = $request->query->get('search');
-        if (null !== $searchProduct && '' !== $searchProduct) {
-            $products = array_filter($products, function ($product) use ($searchProduct) {
-                $productName = strtolower($product->getName());
-                $searchPhrase = strtolower($searchProduct);
-                return strpos($productName, $searchPhrase) !== false;
-            });
-        } else if (null !== $categoryId && "0" !== $categoryId) {
-            $products = array_filter($products,
-                function ($product) use ($categoryId) {
-                    $productCategoryId = null !== $product->getCategoryId() ? $product->getCategoryId()->getCategoryId() : null;
-                    return (int) $categoryId === $productCategoryId;
-                });
-        }
-
-        $toggleCategoryId = $request->query->get('toggleCategoryId');
-        if (null !== $toggleCategoryId) {
-            $toggleCategory = $categoryRepository->find($toggleCategoryId);
-            $toggleCategory->setIsActive(!$toggleCategory->getIsActive());
-            $entityManager->persist($toggleCategory);
-            $entityManager->flush();
-            $this->addFlash('success', $translator->trans('flash.category').' '.$toggleCategory->getName().' '.$translator->trans('flash.category_toggle'));
-        }
+        [$products, $productsCount] = $productRepository->findProducts(
+            $categoryId, 
+            Product::SORT_TYPE[$sortType], 
+            $queryString, 
+            $page, 
+            $limit,
+            $isAdmin
+        );
 
         $categories = $categoryRepository->findAll();
 
@@ -105,7 +87,6 @@ class IndexController extends AbstractController
             $lang = null !== $lang ? $lang->getAttrValue() : null;
         } else {
             $categories = array_filter($categories, function ($category) { return $category->getIsActive(); });
-            $products = $this->filterProductsAvailability($products);
             $lang = $request->getLocale();
         }
 
@@ -116,11 +97,9 @@ class IndexController extends AbstractController
             $this->addFlash('error', $translator->trans('flash.no_products'));
         }
 
-        $sales = $saleRepository->findAll();
+        $sales = $saleRepository->getSales();
         $sales = $this->languageFilter($sales, $lang);
-        $sales = array_filter($sales ?? [], function ($sale) {
-            return $this->isInDate($sale);
-        });
+
         $salesImages = [];
         /** @var Sale $sale */
         foreach ($sales as &$sale) {
@@ -132,41 +111,18 @@ class IndexController extends AbstractController
 
         return $this->render('index/index.html.twig', [
             'categoryForm' => $categoryForm->createView(),
-            'isAdmin' => $isAdmin, 'products' => $products,
+            'isAdmin' => $isAdmin, 
+            'products' => $products,
+            'productsCount' => $productsCount,
             'categories' => $categories,
-            'categoryId' => (int) $categoryId,
+            'categoryId' => $categoryId,
             'sortType' => $sortType,
             'sales' => $sales,
             'salesImages' => $salesImages,
-            'search' => $searchProduct ?? null,
+            'search' => $queryString,
+            'page' => $page,
+            'limit' => $limit
         ]);
-    }
-
-    /**
-     * @param Product[] $products
-     * @return array
-     */
-    private function filterProductsAvailability(array $products): array
-    {
-        return array_filter(
-            $products,
-            function ($product) {
-                return $product->getIsActive()
-                    && 0 < $product->getAmount()
-                    && $this->isInDate($product);
-            });
-    }
-
-    /**
-     * @param Product | Sale $item
-     * @return bool
-     */
-    private function isInDate($item): bool
-    {
-        $startDate = $item->getStartDate()->format(Product::DATE_FORMAT);
-        $now = date(Product::DATE_FORMAT);
-        $endDate = $item->getEndDate();
-        return $startDate <= $now && (null === $endDate || $now <= $endDate->format(Product::DATE_FORMAT));
     }
 
     /**

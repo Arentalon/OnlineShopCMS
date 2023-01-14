@@ -19,6 +19,54 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    public function findProducts(
+        int $categoryId = null, 
+        array $sortType = null, 
+        string $queryString = null, 
+        int $page = null, 
+        int $limit = null,
+        bool $isAdmin = false
+    ) {
+        $builder = $this->createQueryBuilder('p');
+
+        if ($categoryId !== null) {
+            $builder->andWhere('p.categoryId = :categoryId');
+            $builder->setParameter('categoryId', $categoryId);
+        }
+
+        if ($sortType !== null) {
+            $val = current($sortType);
+            $key = key($sortType);
+            $builder->orderBy('p.' . $key, $val);
+        } 
+
+        if ($queryString !== null) {
+            $builder->andWhere('LOWER(p.name) LIKE :searchString');
+            $builder->setParameter('searchString', '%' . strtolower($queryString) . '%');
+        } 
+
+        if ($page !== null && $limit != null) {
+            $offset = $limit * $page;
+            $builder->setFirstResult($offset);
+            $builder->setMaxResults($limit);
+        }
+
+        if (!$isAdmin) {
+            $builder->andWhere('p.isActive = 1');
+            $builder->andWhere('p.amount > 0');
+            $builder->andWhere('p.startDate < :now AND ((p.endDate IS NOT NULL AND p.endDate > :now) OR p.endDate IS NULL)');
+            $builder->setParameter('now', new \DateTime());
+        }
+
+        $products = $builder->getQuery()->getResult() ?? [];
+        $builder->select('COUNT(p.productId)');
+        $builder->setFirstResult(null);
+        $builder->setMaxResults(null);
+        $count = $builder->getQuery()->getSingleScalarResult();
+
+        return [$products, $count];
+    }
+
 //    public function search($key)
 //    {
 //        return $this->createQueryBuilder('p')
