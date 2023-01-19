@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - {% trans %}navbar.product{% endtrans %}{% endblock %}
+
+{% block body %}
+    {# {{ parent() }} #}
+        <div class="col-md-1 col-xl-2"></div>
+            {# {% block left_navbar %}
+            {% endblock %} #}
+    <div class="background col-md-10 col-xl-8 p-md-2">
+{#        <div class="background ">#}
+            {# if admin in edit mode #} 
+
+{#                {% if (isEditMode == 'true') %}#}
+{#                    #}{# {{ form_start(editProductForm) }} #}
+{#                        <div class="productsDescription">#}
+{#                        #}{# {{ form_row(editProductForm.img)}}#}
+{#                        {{ form_row(editProductForm.name)}}#}
+{#                        {{ form_row(editProductForm.price)}} #}
+
+{#                            <img src="{{ asset('assets/img/pepper.png') }}">#}
+{#                            <label for="inputproductName">Produkt</label>#}
+{#                            <input type="text" name="productName" id="inputproductName" class="form-control" required autofocus>#}
+{#                            <label for="inputProductCode">Kod produktu</label>#}
+{#                            <input type="text" name="productCode" id="inputProductCode" class="form-control" required>#}
+{#                            <label for="inputManufacturer">Producent</label>#}
+{#                            <input type="text" name="manufacturer" id="inputManufacturer" class="form-control" required>#}
+{#                            <label for="inputOrigin">Kraj pochodzenia</label>#}
+{#                            <input type="text" name="origin" id="inputOrigin" class="form-control" required>#}
+{#                            <label for="inputCost">Cena za kilogram</label>#}
+{#                            <input type="text" name="Cost" id="inputCost" class="form-control" required>#}
+{#                            <label for="inputMinPurchase">Minimalny zakup</label>#}
+{#                            <input type="text" name="minPurchase" id="inputMinPurchase" class="form-control" required>#}
+{#                            </br>#}
+{#                            <a href="/cms/public/"><button class="btn add_to_cart button" type="submit" title="Zapisz zmiany">Zapisz</button></a>#}
+{#                        </div> #}
+{#                    #}{# {{ form_end(editProductForm) }}  #}
+{#                {% endif %} #}
+{#                #}
+{#                #}{# else if admin in create mode #}{# #}{# TODO: possibility to add a product photo #}
+{#                {% if (isCreateMode == 'true') %}   #}
+{#                    <div class="productsDescription">#}
+{#                    #}{# {{ form_row(editProductForm.img)}}#}
+{#                    {{ form_row(editProductForm.name)}}#}
+{#                    {{ form_row(editProductForm.price)}} #}
+
+{#                        <img src="{{ asset('assets/img/pepper.png') }}">#}
+{#                        <label for="inputproductName">Produkt</label>#}
+{#                        <input type="text" name="productName" id="inputproductName" class="form-control" required autofocus>#}
+{#                        <label for="inputProductCode">Kod produktu</label>#}
+{#                        <input type="text" name="productCode" id="inputProductCode" class="form-control" required>#}
+{#                        <label for="inputManufacturer">Producent</label>#}
+{#                        <input type="text" name="manufacturer" id="inputManufacturer" class="form-control" required>#}
+{#                        <label for="inputOrigin">Kraj pochodzenia</label>#}
+{#                        <input type="text" name="origin" id="inputOrigin" class="form-control" required>#}
+{#                        <label for="inputCost">Cena za kilogram</label>#}
+{#                        <input type="text" name="Cost" id="inputCost" class="form-control" required>#}
+{#                        <label for="inputMinPurchase">Minimalny zakup</label>#}
+{#                        <input type="text" name="minPurchase" id="inputMinPurchase" class="form-control" required>#}
+{#                        </br>#}
+{#                        <a href="/cms/public/"><button class="btn add_to_cart button" type="submit" title="Zapisz zmiany">Zapisz</button></a>#}
+{#                    </div> #}
+{#                {% endif %} #}
+
+                {% if  (isEditMode == 'false' and isCreateMode == 'false') %}
+                    {% for product in products %}
+                        <div class="productsDescription">
+                            {# <input type="hidden" id="productImg" value="{{ asset(product.img) }}"> #}
+                            <img src="{{ asset('productsImages/' ~ product.img) }}">
+                            {# <input type="hidden" id="productName" value="{{product.name}}"> #}
+                            <b >{% trans %}product.product{% endtrans %}</b> {{product.name}}</br>
+                            <b >{% trans %}form.product.producent{% endtrans %}:</b> {{product.producer}}</br>
+                            <input type="hidden" id="productId" value="{{product.productId}}">
+                            <b >{% trans %}product.code{% endtrans %}:</b> {{product.productId}}</br>
+                            <b >{% trans %}form.product.description{% endtrans %}:</b> {{product.description}}</br>
+                            <span></span></br>
+                            {# <input type="hidden"  id="productPrice" value="{{product.price}}"> #}
+                            <b >{% trans %}form.product.amount{% endtrans %}:</b> {{product.amount}}</br>
+                            <input type="hidden" id="amountOfProducts" value="{{product.amount}}">
+                            <b>{% trans %}price{% endtrans %}:</b> {{product.price}} {{product.priceUnit}} </br>
+                    {% endfor %}
+
+                    {# {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                    {{ form_start(form) }}
+                        {{ form_row(form.amount) }}
+                        <button type="submit">Dodaj do koszyka</button>
+                    {{ form_end(form) }} #}
+
+                                <div id="projector_buy_section" class="product_section">
+                                    <label class="projector_label"></label>
+                                    <div class="projector_buttons" id="projector_buttons">
+                                        <div class="projector_number" id="projector_number_cont">
+                                            <button class="projector_number_down" id="minus" onclick="addValue(this.id)">
+                                                <i>-</i>
+                                            </button>
+
+                                            <input class="projector_number" id="productAmount" onchange="addAmount()" value=1>
+                                            <button class="projector_number_up" id="plus" onclick="addValue(this.id)">
+                                                <i>+</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                </br>
+                                <button class="btn add_to_cart button" onclick="addToCart()">{% trans %}product.add_to_cart{% endtrans %}</button>
+                                </br>
+                                <p id="message"></p>
+                        </div> 
+                {% endif %}        
+            </div>
+        </div>
+    </div>
+{% endblock %}

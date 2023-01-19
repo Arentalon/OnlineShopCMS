@@ -1,0 +1,8 @@
+<h1>Witaj! Oto dane do finalizacji zamówienia:</h1>
+{% if accountNumber is defined and accountNumber is not null %}
+Nr konta: {{ accountNumber }}
+{% endif %}
+<p>Kliknij w poniższy link, aby dokonać zapłaty: <br><br>
+    <a href="{{ signedUrl }}">Zapłać teraz</a>
+    . Link wygaśnie za {{ expiresAtMessageKey|trans(expiresAtMessageData, "VerifyEmailBundle") }}.</p>
+<p>Pozdrawiamy!</p>

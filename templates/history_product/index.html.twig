@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - {% trans %}navbar.story{% endtrans %}{% endblock %}
+
+{% block body %}
+<div class="col-sm-1"></div>
+    <div class="main col-sm-10 p-sm-2">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% if (waitingProductList != []) %}
+            <h2 class="mb-3 mt-5 font-weight-normal text-center">{% trans %}product_history.waiting{% endtrans %}</h2>
+            {% for product in waitingProductList %}
+                <div class="cartItem">
+                    <div class="mx-3 d-inline-block">
+                        {{product.name}}
+                    </div>
+                    <div class="mx-3 d-inline-block">
+                        {% trans %}form.product.amount{% endtrans %}: {{product.amount}}
+                    </div>
+                    <div class="mx-3 d-inline-block">
+                        {% trans %}form.product.price{% endtrans %}: {{product.price}}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <h2 class="mb-3 mt-5 font-weight-normal text-center">{% trans %}navbar.story{% endtrans %}</h2>
+        {% for historyProduct in historyProductList %}
+            <div class="text-center"> {% trans %}product_history.purchase{% endtrans %} {{historyProduct.purchase}} - {{historyProduct.fullPrice}} zł | {% trans %}product_history.date{% endtrans %} - {{historyProduct.date}} </div>
+            {% for product in historyProduct.historyProduct %}
+            <div class="cartItem">
+                <div class="mx-3 d-inline-block">
+                    {{product.name}}
+                </div>
+                <div class="mx-3 d-inline-block">
+                    {% trans %}form.product.amount{% endtrans %}: {{product.amount}}
+                </div>
+                <div class="mx-3 d-inline-block">
+                    {% trans %}form.product.price{% endtrans %}: {{product.price}}
+                </div>
+                <div class="mx-5 d-inline-block">
+
+                </div>
+            </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

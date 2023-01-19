@@ -1,0 +1,148 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="col-md-1" ></div>
+    <nav id="sidebar-wrapper" class="col-md-2">
+        <ul class="nav sidebar-nav">
+            <div class="sidebar-header sidebar-brand">
+                {% trans %}index.categories{% endtrans %}
+                {# {% if isAdmin %}
+                    <a href="product" class="icon icon-regular icon-pencil"></a>
+                {% endif %} #}
+            </div>
+            <li><a href="{{ path('index_controller')  }}" type="submit">{% trans %}index.all_products{% endtrans %}</a></li></br>
+            {% for category in categories %}
+                <li class="{% if categoryId is same as(category.categoryId) %}selected{% endif %}">
+                    <a href="{{ path('index_controller', {'categoryId': category.categoryId})  }}" type="submit">
+                        {{ category.name }}
+                    </a>
+                    <a href="{{ path('index', {'toggleCategoryId': category.categoryId}) }}" style="float: right">
+                        {% if isAdmin %}
+                            <input type="checkbox" {% if category.isActive %}checked="checked"{% endif %}>
+                        {% endif %}
+                    </a>
+                </li>
+                </br>
+            {% endfor %}
+            {% if isAdmin %}
+                {% form_theme categoryForm 'bootstrap_4_layout.html.twig' %}
+                {{ form_start(categoryForm) }}
+                    {{ form_row(categoryForm.name) }}
+                    {{ form_row(categoryForm.lang) }}
+                    <button type="submit" class="button icon icon-regular icon-plus text-warning" style="margin-top: 0px">{% trans %}index.add{% endtrans %}</button>
+                {{ form_end(categoryForm) }}
+            {% endif %}
+        </ul>
+        <ul class="nav sidebar-nav sidebar-sort">
+            <div class="sidebar-header-sort sidebar-brand-sort">{% trans %}index.sort.sort{% endtrans %}</div>
+            <li><sortTitle>{% trans %}price{% endtrans %}</sortTitle></li>
+            <li class="{% if sortType is same as('priceDesc') %}selected{% endif %}">
+                <a href="{{ path('index_controller', {'sortType': 'priceDesc', 'categoryId': categoryId, 'search': search})  }}" type="submit">
+                    {% trans %}index.sort.price_desc{% endtrans %}
+                </a>
+            </li></br>
+            <li class="{% if sortType is same as('priceAsc') %}selected{% endif %}">
+                <a href="{{ path('index_controller', {'categoryId': categoryId, 'sortType': 'priceAsc', 'search': search})  }}" type="submit">
+                    {% trans %}index.sort.price_asc{% endtrans %}
+                </a>
+            </li></br>
+            <li><sortTitle>{% trans %}index.sort.time{% endtrans %}</sortTitle></li>
+            <li class="{% if sortType is same as('timeDesc') %}selected{% endif %}">
+                <a href="{{ path('index_controller', {'categoryId': categoryId, 'sortType': 'timeDesc', 'search': search})  }}" type="submit">
+                    {% trans %}index.sort.time_desc{% endtrans %}
+                </a>
+            </li></br>
+            <li class="{% if sortType is same as('timeAsc') %}selected{% endif %}">
+                <a href="{{ path('index_controller', {'categoryId': categoryId, 'sortType': 'timeAsc', 'search': search})  }}" type="submit">
+                    {% trans %}index.sort.time_asc{% endtrans %}
+                </a>
+            </li></br>
+
+        </ul>
+    </nav>
+
+    {#MAIN#}
+    <div class="background col-md-8">
+        {#SALES#}
+        <div>
+            {% for sale in sales %}
+                {% if sale.backImg is defined and sale.backImg is not null %}
+                    {% set backImg = asset('productsImages/' ~ sale.backImg) %}
+                {% else %}
+                    {% set backImg = asset('assets/img/background.png') %}
+                {% endif %}
+                <div class="mySlides text-light p-sm-4" style="background-image: url({{ backImg }});">
+                    <div class="bg-dark border border-light rounded">
+                        <div class="d-flex flex-row justify-content-around align-items-center">
+                            <div class="mx-1 p-sm-2">
+                                <h3>{{ sale.info }}</h3>
+                            </div>
+                            <div class="mx-1 p-sm-2">
+                                <h5>{{ sale.productId.name }}</h5>
+                            </div>
+                            {% if salesImages[sale.id] is defined and salesImages[sale.id] is not null %}
+                                <div class="mx-1 p-sm-2">
+                                    <img src="{{ asset('productsImages/' ~ salesImages[sale.id]) }}" style="height: 60px">
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="d-flex flex-row justify-content-center py-1">
+                            {% for sale in sales %}
+                                <span class="dot my-1" onclick="setSlide({{ loop.index0 }})"></span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+
+        <div class="p-sm-3">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% for product in products %}
+                <div class="products">
+                    <div class="">
+                        <a href="{{ path('show_product', {'productId': product.productId, 'isEditMode': 'false', 'isCreateMode': 'false'})  }}" type="submit">
+                        {% if isAdmin %}
+                            <div class="admin-edit">
+                                <span type="submit" class="icon icon-regular icon-pencil text-warning"></span>
+                            </div>
+                        {% endif %}
+
+                            <img src="{{ asset('productsImages/' ~ product.img) }}">
+                            <b>{{product.name}}</b></br>
+                            <b>{% trans %}index.price{% endtrans %}</b> {{product.price}} {{ product.priceUnit }}</br>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+            {% if isAdmin %}
+                <div class="products"> {# if admin is logged in, he can add NEW product #}
+                    <div class="admin-add">
+                        <a href="{{ path('show_product') }}" class="icon icon-regular icon-plus text-warning font-weight-bold h4">{% trans %}index.add{% endtrans %}</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+{#    {% block stylesheets %}#}
+{#        {{ parent() }}#}
+{#        <link rel="stylesheet" href="{{ asset('assets/css/saleSlider.css') }}">#}
+{#    {% endblock %}#}
+
+{#    {% block javascripts %}#}
+{#        {{ parent() }}#}
+{#        <script src="{{ asset('assets/js/saleSlider.js') }}"></script>#}
+{#    {% endblock %}#}
+{% endblock %}

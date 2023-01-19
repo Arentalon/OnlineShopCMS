@@ -1,0 +1,141 @@
+all_lang: -- all --
+save: Save changes
+price: Price
+login_fail: Invalid login details!
+navbar:
+  home: Main Page
+  shop_data: Store details
+  cart: Cart
+  story: Purchase history
+  account: My Account
+  logout: Log out
+  login: Log in
+  register: Register
+  search: Search
+  research: Search
+  payment: Payment
+  product: Product
+  product_edit: Product Edit
+  registration: Registration
+  log: Log in
+form:
+  category:
+    name: New category
+    lang: Language
+  change_password:
+    new: New password
+    confirm: Confirm new password
+  product:
+    photo: Photo
+    name: Name
+    price: Price
+    price_unit: Price unit
+    amount: Amount of product
+    category: Category
+    other: -- other --
+    start_date: Product start date
+    end_date: Product end date
+    is_active: Is active
+    description: Description
+    producent: Producer
+    lang: Language
+  account:
+    mail: E-mail
+    name: Name
+    surname: Surname
+    city: City
+    country: Country
+    street: Street
+    nr: Nr
+    code: Code
+    lang: Language
+  sale:
+    product: Product
+    lang: Language
+    start_date: Start date
+    end_date: End date
+    info: Description
+    back_img: Background image
+  registration:
+    agree: Terms of use of the website
+    pass: Password
+    pass_confirm: Confirm password
+  shop:
+    name: Store name
+    account: Bank account number
+    lang_view: Administrator view in language
+cart:
+  see: View the product
+  delete: Delete
+  order: Submit your order
+  in_progress: Order in progress
+  total_price: Total price
+  cancel: Cancel the order
+  new_cart: New order
+index:
+  categories: Category
+  all_products: All products
+  add: Add
+  price: Price
+  sort:
+    sort: Sort
+    price: 'Price:'
+    price_desc: Descending
+    price_asc: Ascending
+    time: 'Time of adding the product:'
+    time_desc: From the latest
+    time_asc: From the oldest
+account:
+  personal_data: Personal data
+  address: Address
+  optional: (optional)
+  change_pass: Change password
+  pass_change: Password change
+product:
+  product: 'Product:'
+  code: 'Product code:'
+  add_to_cart: Add to cart
+product_history:
+  date: Date
+  purchase: Purchase
+  waiting: Order in progress
+shop:
+  sales: Sales
+  add_sale: Add new sale
+  new_sale: New sale
+  current_sales: Current sales
+  sale_time_period: Duration
+payment:
+  your_data: Personal data
+  name: Name
+  surname: Surname
+  change_settings: Change your data
+  address: Address
+  card_data: Enter your payment card details
+  card_nr: Card number
+  card_date: Card expiry date
+  card_code: CVV2 / CVC2 / PCSC code
+  conditions: I accept the terms and conditions and privacy policy
+  confirm_order: Confirm your order
+  products: Order summary
+mail:
+  confirmation: E-mail confirmation
+  order: Shopping finalization
+flash:
+  mail: Go to the e-mail address provided to activate the account
+  mail_confirmed: Your email address has been verified!
+  category: Category
+  category_toggle: has changed its activity!
+  add_cat: Added a category named
+  cat_exist: A category with that name already exists!
+  no_products: No products found
+  data_change: Your data has been changed successfully!
+  pass_change: Password has been changed successfully!
+  error: An unexpected error has occurred!
+  product: Product
+  product_update: has been updated successfully!
+  logout: Successfully logged out!
+  shop_data: Store details have been changed successfully!
+  sale_added: Sale was added successfully!
+  order_added_1: 'Your order was added sucessfully. Enter your e-mail: '
+  order_added_2: ' to finalize your shopping!'

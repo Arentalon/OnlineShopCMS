@@ -1,0 +1,8 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    globals:
+        shopData: '@App\Service\ShopDataGenerator'
+
+when@test:
+    twig:
+        strict_variables: true

@@ -1,0 +1,12 @@
+change_password:
+  invalid_message: Hasła muszą być identyczne
+product:
+  max_size: Rozmiar_zdjęcia_nie_może_przekraczać_3MB!
+  mime: Obsługiwany_format_pliku_musi_być_obrazem!
+registration:
+  agreement: Musisz zaakceptować warunki korzystania z serwisu
+  pass_empty: Podaj hasło
+  pass_min: Twoje hasło musi mieć co najmniej {{ limit }} znaków
+  pass_max: Twoje hasło nie może przekraczać {{ limit }} znaków
+  pass_unique: Hasła muszą być identyczne
+  mail_unique: Istnieje już użytkownik o takim adresie e-mail

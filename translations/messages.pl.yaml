@@ -1,0 +1,141 @@
+all_lang: -- wszystkie --
+save: Zapisz zmiany
+price: Cena
+login_fail: Nieprawidłowe dane logowania!
+navbar:
+  home: Strona Główna
+  shop_data: Dane sklepu
+  cart: Koszyk
+  story: Historia zakupów
+  account: Moje konto
+  logout: Wyloguj się
+  login: Zaloguj się
+  register: Zarejestruj się
+  search: Szukaj
+  research: Wyszukaj
+  payment: Płatność
+  product: Produkt
+  product_edit: Edycja produktu
+  registration: Rejestracja
+  log: Logowanie
+form:
+  category:
+    name: Nowa kategoria
+    lang: Język
+  change_password:
+    new: Nowe hasło
+    confirm: Potwierdź nowe hasło
+  product:
+    photo: Zdjęcie
+    name: Nazwa
+    price: Cena
+    price_unit: Jednostka ceny
+    amount: Ilość produktu
+    category: Kategoria
+    other: -- inne --
+    start_date: Data wprowadzenia produktu
+    end_date: Data wycofania produktu
+    is_active: Czy aktywny
+    description: Opis
+    producent: Producent
+    lang: Język
+  account:
+    mail: E-mail
+    name: Imię
+    surname: Nazwisko
+    city: Miasto
+    country: Kraj
+    street: Ulica
+    nr: Nr
+    code: Kod
+    lang: Język
+  sale:
+    product: Produkt
+    lang: Język
+    start_date: Data rozpoczęcia
+    end_date: Data zakończenia
+    info: Opis promocji
+    back_img: Tło
+  registration:
+    agree: Warunki korzystania z serwisu
+    pass: Hasło
+    pass_confirm: Potwierdź hasło
+  shop:
+    name: Nazwa sklepu
+    account: Numer konta bankowego
+    lang_view: Widok dla administratora w języku
+cart:
+  see: Zobacz produkt
+  delete: Usuń
+  order: Złóż zamówienie
+  in_progress: Zamówienie w trakcie realizacji
+  total_price: Całkowita kwota do zapłaty
+  cancel: Anuluj zamówienie
+  new_cart: Nowe zamówienie
+index:
+  categories: Kategorie
+  all_products: Wszystkie produkty
+  add: Dodaj
+  price: Cena
+  sort:
+    sort: Sortuj
+    price: 'Cena:'
+    price_desc: Malejąco
+    price_asc: Rosnąco
+    time: 'Czas dodania:'
+    time_desc: Od najnowszych
+    time_asc: Od najstarszych
+account:
+  personal_data: Dane osobiste
+  address: Adres
+  optional: (opcjonalny)
+  change_pass: Zmień hasło
+  pass_change: Zmiana hasła
+product:
+  product: 'Produkt:'
+  code: 'Kod produktu:'
+  add_to_cart: Dodaj do koszyka
+product_history:
+  date: Data
+  purchase: Zakup
+  waiting: Zakupy w trakcie realizacji
+shop:
+  sales: Promocje
+  add_sale: Dodaj promocje
+  new_sale: Nowa promocja
+  current_sales: Aktualne promocje
+  sale_time_period: Czas trwania
+payment:
+  your_data: Twoje dane
+  name: Imię
+  surname: Nazwisko
+  change_settings: Zmiana ustawień
+  address: Adres
+  card_data: Wprowadź dane karty płatniczej
+  card_nr: Numer karty
+  card_date: Data ważności karty
+  card_code: Kod CVV2 / CVC2 / PCSC
+  conditions: Akceptuję warunki regulaminu i polityki prywatności
+  confirm_order: Potwierdź zamówienie
+  products: Podsumowanie zamówienia
+mail:
+  confirmation: Potwierdzenie e-maila
+  order: Finalizacja zakupów
+flash:
+  mail: Udaj się na podanego e-maila, by aktywować konto
+  mail_confirmed: Twój adres e-mail został zweryfikowany!
+  category: Kategoria
+  category_toggle: zmieniła swoją aktywność!
+  add_cat: Dodano kategorię o nazwie
+  cat_exist: Kategoia o takiej nazwie już istnieje!
+  no_products: Nie znaleziono żadnych produktów
+  data_change: Twoje dane zostały zmienione pomyślnie!
+  pass_change: Hasło zostało zmienione pomyślnie!
+  error: Wystąpił nieoczekiwany błąd!
+  product: Produkt
+  product_update: został zaktualizowany pomyślnie!
+  logout: Wylogowano pomyślnie!
+  shop_data: Dane sklepu zostały zmienione pomyślnie!
+  sale_added: Promocja została dodana!
+  order_added_1: 'Zamówienie zostało złożone. Udaj się na adres e-mail: '
+  order_added_2: ' w celu finalizacji zakupu!'

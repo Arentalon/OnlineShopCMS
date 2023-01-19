@@ -1,0 +1,112 @@
+
+/* MAIN BACKGROUND */
+
+/* product description */
+.background {
+    font-size: 15px;
+    /*width:900px;*/
+    /*height: 550px;*/
+    line-height: 30px;
+    overflow: auto;
+    border-radius: 12px;
+    background: rgb(75, 73, 100);
+    /*padding-top: 5%;*/
+    padding-bottom: 60px !important;
+    margin-bottom: 60px;
+}
+
+/* PRODUCTS DESCRIPTION // WE CAN ADD THEM TO THE CART */
+
+/* photos of product description */
+.background .productsDescription img {
+    margin: 50px;
+    width:450px;
+    height: 400px;
+    float: left;
+    object-fit: contain;
+}
+/* line in product description */
+.background .productsDescription span {
+    position: relative; 
+    line-height: 60px;
+    display: inline-block;
+    width: 30%;
+    list-style:none;
+    border-bottom: 2px solid rgba(72, 147, 218, 0.3);
+}
+
+/* PRODUCT DESCRIPTION // BUTTONS FOR ORDERING THE PRODUCT */
+
+/* Buttons for ordering amount of product */
+#projector_buy_section .projector_buttons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#projector_buy_section #projector_number_cont {
+    display: flex;
+    width: calc(50% - 1rem);
+    border: 1px solid #fff;
+    background: #fff; 
+}
+
+#projector_buy_section #projector_number_cont .projector_number_down, #projector_buy_section #projector_number_cont .projector_number_up {
+    transition: color 0.2s;
+    border: none;
+}
+
+#projector_buy_section #projector_number_cont > * {
+    height: 50px;
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem;
+    min-width: 0;
+}
+
+#projector_buy_section #projector_number_cont .projector_number {
+    flex: 2;
+    padding: 10;
+    border: none;
+    width: 100%;
+}
+
+#add_to_cart {
+    margin-top: 20%;
+    width: 65%;
+}
+
+/* PRODUCTS ON THE MAIN PAGE WHERE WE CAN SCROLL AND PICK WHICH WE WANT */
+
+/* products on main page */
+.background .products {
+    text-align: center;
+    font-size: 15px;
+    width:240px;
+    float:left;
+    margin-bottom: 50px;
+    margin-right: 53px;
+    background: rgb(75, 73, 100);
+
+}
+/* photos of products on main page */
+.background .products img {
+    margin: 20px;
+    width:190px;
+    height: 160px;
+    object-fit: contain;
+}
+
+.admin-edit {
+    margin-left: 200px;
+}
+
+.admin-add {
+    margin: 50px;
+    margin-top: 100px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+

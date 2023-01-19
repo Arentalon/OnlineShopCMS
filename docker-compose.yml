@@ -1,0 +1,42 @@
+version: '3.3'
+services:
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        restart: always
+        ports:
+            - 83:80
+        depends_on:
+            - mysql
+        environment:
+            PMA_HOST: mysql
+            PMA_PORT: 3306
+            UPLOAD_LIMIT: 500M
+            MAX_EXECUTION_TIME: 3600
+            MYSQL_ROOT_PASSWORD: qwerty
+        volumes:
+            - ./docker/phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
+    mysql:
+        image: mysql:8.0
+        environment:
+            MYSQL_DATABASE: cms
+            MYSQL_ROOT_PASSWORD: qwerty
+        restart: always
+        command: mysqld --sql_mode=''
+        volumes:
+            - ./mysql:/var/lib/mysql
+        ports:
+            - 3306:3306
+    web:
+        build:
+            context: .
+            dockerfile: docker/web/Dockerfile
+        ports:
+            - 81:80
+        volumes:
+            - ./:/var/www
+            - /var/www/vendor
+        depends_on:
+            - mysql
+    mail:
+      image: bytemark/smtp
+      restart: always
