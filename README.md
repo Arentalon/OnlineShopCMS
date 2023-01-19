@@ -17,3 +17,6 @@ Plik można zaimportować przy użyciu PhpMyAdmin `localhost:83`
 
 ## Manualna aktywacja konta użytkownia
 W przypadku braku maila z linkiem weryfikacyjnym, należy ustawić wartość kolumny `is_verified` w tabeli `user` na 1. 
+
+## Skrypt dodająy fejkowe dane
+Skrypt odpala się przy użyciu komendy: `php bin/console doctrine:fixtures:load --append`
