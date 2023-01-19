@@ -69,6 +69,7 @@ class RegistrationController extends AbstractController
             $name = null !== $shopName ? $shopName->getAttrValue() : 'Shop';
             $emailTemplate = 'en' === $request->getLocale() ? 'registration/confirmation_email_en.html.twig' : 'registration/confirmation_email_pl.html.twig';
 
+            /*
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
                     ->from(new Address('cms@gmail.com', $name))
@@ -76,6 +77,7 @@ class RegistrationController extends AbstractController
                     ->subject($translator->trans('success', [], 'mail.confirmation'))
                     ->htmlTemplate($emailTemplate)
             );
+            */
             // do anything else you need here, like send an email
             $this->addFlash('success', $translator->trans('flash.mail'));
 
